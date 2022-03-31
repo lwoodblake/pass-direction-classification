@@ -1,0 +1,70 @@
+<head>
+  <!-- Plotly.js -->
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+
+<div id="lfcDiv"></div>
+
+<script>
+var clubData = [
+    {diagonal: 55.4, horizontal: 19.06, vertical: 25.54, label: 'Liverpool'},
+    {diagonal: 56.86, horizontal: 23.53, vertical: 19.61, label: 'Tottenham'}
+];
+
+var lfcData = [
+    {diagonal: 29.41, horizontal: 29.41, vertical: 41.18, label: 'Salah'},
+    {diagonal: 53.19, horizontal: 19.15, vertical: 27.66, label: 'Alexander-Arnold'},
+    {diagonal: 56.25, horizontal: 34.375, vertical: 9.375, label: 'van Dijk'},
+    {diagonal: 66.67, horizontal: 5.55, vertical: 27.78, label: 'Robertson'},
+    {diagonal: 45.83, horizontal: 12.5, vertical: 41.67, label: "Mané"},
+    {diagonal: 52.17, horizontal: 17.39, vertical: 30.44, label: "Fabinho"},
+    {diagonal: 51.85, horizontal: 25.93, vertical: 22.22, label: "Matip"},
+    {diagonal: 57.69, horizontal: 23.08, vertical: 19.23, label: "Henderson"},
+    {diagonal: 9.1, horizontal: 45.45, vertical: 45.45, label: "Firmino"},
+    {diagonal: 58.33, horizontal: 16.67, vertical: 25, label: "Wijnaldum"},
+];
+
+Plotly.newPlot('lfcDiv', [{
+    type: 'scatterternary',
+    mode: 'markers',
+    a: lfcData.map(function(d) { return d.diagonal; }),
+    b: lfcData.map(function(d) { return d.horizontal; }),
+    c: lfcData.map(function(d) { return d.vertical; }),
+    text: lfcData.map(function(d) { return d.label; }),
+    marker: {
+        symbol: 100,
+        color: '#DB7365',
+        size: 14,
+        line: { width: 2 }
+    },
+}], {
+    ternary: {
+        sum: 100,
+        aaxis: makeAxis('Diagonal', 0),
+        baxis: makeAxis('<br>Horizontal', 45),
+        caxis: makeAxis('<br>Vertical', -45),
+        bgcolor: '#ffffff'
+    },
+    annotations: [{
+      showarrow: false,
+      text: 'Produced using the example on the <a href="https://plotly.com/javascript/ternary-plots/">Plotly website</a>',
+        x: 1.0,
+        y: 1.3,
+        font: { size: 15 }
+    }],
+    paper_bgcolor: '#ffffff',
+});
+
+function makeAxis(title, tickangle) {
+    return {
+      title: title,
+      titlefont: { size: 20 },
+      tickangle: tickangle,
+      tickfont: { size: 15 },
+      tickcolor: 'rgba(0,0,0,0)',
+      ticklen: 5,
+      showline: true,
+      showgrid: true
+    };
+}
+</script>
